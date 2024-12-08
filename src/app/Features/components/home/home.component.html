@@ -1,0 +1,60 @@
+<app-nav-bar></app-nav-bar>
+
+<div class="p-grid p-5">
+
+
+
+    <p-toast></p-toast>
+  
+
+    <p-confirmdialog></p-confirmdialog>
+  
+    <!-- Filter Section -->
+    <div class="p-col-12 p-mb-3 mb-5">
+      <div class="p-grid">
+     
+        <div class="p-col-6">
+          <p-dropdown
+            [options]="categories"
+            [(ngModel)]="selectedCategory"
+            (onChange)="filterBooks()"
+            placeholder="Filter by Category"
+          ></p-dropdown>
+        </div>
+      </div>
+    </div>
+  
+    <!-- Books Table -->
+    <div class="p-col-12 ">
+      <p-table
+        [value]="filteredBooks"
+        [paginator]="true"
+        [rows]="5"
+        [responsiveLayout]="'scroll'"
+        stripedRows>
+        <ng-template pTemplate="header">
+          <tr>
+            <th>Title</th>
+            <th>Category</th>
+            <th>Rating</th>
+            <th class="text-center">Actions</th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-book>
+          <tr>
+            <td>{{ book.title }}</td>
+            <td>{{ book.category }}</td>
+            <td>{{ book.rating }}</td>
+            <td class="text-center">
+              <p-button
+                (click)="deleteBook(book)"
+                label="Delete"
+                severity="danger"
+                [outlined]="true"
+              ></p-button>
+            </td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>
+  </div>
